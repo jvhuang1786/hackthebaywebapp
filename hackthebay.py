@@ -13,7 +13,7 @@ st.image(image, width = 800)
 
 def main():
     activities = ['Intro to the Chesapeake Bay Challenge', 'Data Preparation',
-    'Data Visualization', 'Total Nitrogen Model']
+    'Data Visualization', 'Total Nitrogen Model', 'About The Team']
     option = st.sidebar.selectbox('Selection Option:', activities)
 
 #Intro
@@ -26,10 +26,18 @@ def main():
         """
         st.markdown(title_page,unsafe_allow_html=True)
 
-        if st.sidebar.checkbox('Sidebar'):
+        if st.sidebar.checkbox('Pollution in the Chesapeake Bay'):
             html_temp = """
             <div style="background-color:#33A2FF;padding:1px">
-            <h4 style="color:#212F3D;text-align:center;">Sidebar</h4>
+            <h4 style="color:#212F3D;text-align:center;">Pollution in the Chesapeake Bay</h4>
+            </div>
+            """
+            st.markdown(html_temp,unsafe_allow_html=True)
+
+        if st.sidebar.checkbox('Assesment and Plan of Action'):
+            html_temp = """
+            <div style="background-color:#33A2FF;padding:1px">
+            <h4 style="color:#212F3D;text-align:center;">Assesment and Plan of Action</h4>
             </div>
             """
             st.markdown(html_temp,unsafe_allow_html=True)
@@ -51,14 +59,29 @@ def main():
         """
         st.markdown(html_temp,unsafe_allow_html=True)
 
-        if st.sidebar.checkbox('Sidebar'):
+        if st.sidebar.checkbox('Land Cover Data Collection and Prep'):
             html_temp = """
             <div style="background-color:#33A2FF;padding:1px">
-            <h4 style="color:#212F3D;text-align:center;">Sidebar</h4>
+            <h4 style="color:#212F3D;text-align:center;">Land Cover Data Collection andd Prep</h4>
             </div>
             """
             st.markdown(html_temp,unsafe_allow_html=True)
 
+        if st.sidebar.checkbox('Weather and Air condition Data prep'):
+            html_temp = """
+            <div style="background-color:#33A2FF;padding:1px">
+            <h4 style="color:#212F3D;text-align:center;">Weather and Air condition Data prep</h4>
+            </div>
+            """
+            st.markdown(html_temp,unsafe_allow_html=True)
+
+        if st.sidebar.checkbox('Water Quality Data prep'):
+            html_temp = """
+            <div style="background-color:#33A2FF;padding:1px">
+            <h4 style="color:#212F3D;text-align:center;">Water Quality Data prep</h4>
+            </div>
+            """
+            st.markdown(html_temp,unsafe_allow_html=True)
 
         explorationwrite_up = """
         Jen write here
@@ -79,10 +102,18 @@ def main():
         """
         st.markdown(html_temp,unsafe_allow_html=True)
 
-        if st.sidebar.checkbox('Sidebar'):
+        if st.sidebar.checkbox('Water Quality Compounds Visualization'):
             html_temp = """
             <div style="background-color:#33A2FF;padding:1px">
-            <h4 style="color:#212F3D;text-align:center;">Sidebar</h4>
+            <h4 style="color:#212F3D;text-align:center;">Water Quality Compounds Visualization</h4>
+            </div>
+            """
+            st.markdown(html_temp,unsafe_allow_html=True)
+
+        if st.sidebar.checkbox('Land Cover, HUC12_ relation to Nitrogen'):
+            html_temp = """
+            <div style="background-color:#33A2FF;padding:1px">
+            <h4 style="color:#212F3D;text-align:center;">Land Cover, HUC12_ relation to Nitrogen</h4>
             </div>
             """
             st.markdown(html_temp,unsafe_allow_html=True)
@@ -109,12 +140,41 @@ def main():
         """
         st.markdown(html_temp,unsafe_allow_html=True)
 
-        if st.sidebar.checkbox('Sidebar'):
+        ##########
+        #Load DataFrames here for charts
+
+        ##########
+
+        if st.sidebar.checkbox('CatBoost Model'):
             html_temp = """
             <div style="background-color:#33A2FF;padding:1px">
-            <h4 style="color:#212F3D;text-align:center;">Sidebar</h4>
+            <h4 style="color:#212F3D;text-align:center;">CatBoost Model</h4>
             </div>
             """
+            st.markdown(html_temp,unsafe_allow_html=True)
+
+        if st.sidebar.checkbox('RandomForest Model'):
+            html_temp = """
+            <div style="background-color:#33A2FF;padding:1px">
+            <h4 style="color:#212F3D;text-align:center;">RandomForest Model</h4>
+            </div>
+            """
+            st.markdown(html_temp,unsafe_allow_html=True)
+
+        if st.sidebar.checkbox('xgBoost Model'):
+            html_temp = """
+            <div style="background-color:#33A2FF;padding:1px">
+            <h4 style="color:#212F3D;text-align:center;">xgBoost Model</h4>
+            </div>
+            """
+            st.markdown(html_temp,unsafe_allow_html=True)
+
+        if st.sidebar.checkbox('Final Model'):
+                html_temp = """
+                <div style="background-color:#33A2FF;padding:1px">
+                <h4 style="color:#212F3D;text-align:center;">Final Model</h4>
+                </div>
+                """
             st.markdown(html_temp,unsafe_allow_html=True)
 
 
@@ -125,6 +185,24 @@ def main():
 
         image = Image.open('images/oyster2.png')
         st.image(image, width = 800)
+
+    elif option == 'About The Team':
+        st.title('Data Preparation')
+        html_temp = """
+        <div style="background-color:#33A2FF;padding:1px">
+        <h3 style="color:#212F3D;text-align:center;">Data Preparation</h3>
+        </div>
+        """
+        st.markdown(html_temp,unsafe_allow_html=True)
+
+        about_write = """
+        One sentence about each team member
+        Link to github repo
+        """
+
+        st.markdown(about_write,unsafe_allow_html=True)
+
+
 
 
 if __name__ == '__main__':
