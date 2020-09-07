@@ -3,6 +3,7 @@ import numpy as np
 import pandas as pd
 import datetime
 import plotly.graph_objects as go
+import plotly.express as px
 import matplotlib.pyplot as plt
 from PIL import Image
 
@@ -272,6 +273,8 @@ def main():
             RandomForest Write up
             """
             st.markdown(modelwrite_up, unsafe_allow_html=True)
+
+
 
         if st.sidebar.checkbox('xgBoost Model'):
             html_temp = """
