@@ -168,7 +168,7 @@ def main():
         #Load DataFrames here for charts
 
         ###Water Quality
-        df_water = pd.read_csv('data/dfnitro.csv')
+        df_water = pd.read_csv('data/dfnitro.csv', index_col = 0)
 
 
         ###LandCover
@@ -189,6 +189,11 @@ def main():
 
             """
             st.markdown(vizwrite_up, unsafe_allow_html=True)
+
+            # fig = px.scatter_matrix(predict_rf,
+            #     dimensions=["Actual", "gridRF", "gridRF2"])
+            #
+            # st.plotly_chart(fig)
 
         if st.sidebar.checkbox('Land Cover, HUC12_ relation to Nitrogen'):
             html_temp = """
@@ -233,16 +238,18 @@ def main():
 
         ###Randomforest
         mi_df = pd.read_csv('data/mi_rf.csv', index_col = 0)
-        feature_rf_rob = pd.read_csv('data/featureimprf_rob.csv')
-        predict_rf = pd.read_csv('data/rfpredictions_df.csv')
-        result_rf_rob = pd.read_csv('data/rf_result_robust.csv')
-        feature_rf_std = pd.read_csv('data/featureimprf_scale.csv')
-        result_rf_std = pd.read_csv('data/rf_result_standard.csv')
+        mi_df = mi_df.reset_index().sort_values(ascending = False, by = '0')
+        mi_df = mi_df.rename(columns = {'index':'features', '0': 'mi Stat'})
+        feature_rf_rob = pd.read_csv('data/featureimprf_rob.csv', index_col = 0)
+        predict_rf = pd.read_csv('data/rfpredictions_df.csv', index_col = 0)
+        result_rf_rob = pd.read_csv('data/rf_result_robust.csv', index_col = 0)
+        feature_rf_std = pd.read_csv('data/featureimprf_scale.csv', index_col = 0)
+        result_rf_std = pd.read_csv('data/rf_result_standard.csv',index_col = 0)
 
         ###xgBoost
-        feature_xgb = pd.read_csv('data/featuresimpxgb.csv')
-        predict_xgb = pd.read_csv('data/predictxgbdf.csv')
-        result_xgb = pd.read_csv('data/xgb_results.csv')
+        feature_xgb = pd.read_csv('data/featuresimpxgb.csv', index_col = 0)
+        predict_xgb = pd.read_csv('data/predictxgbdf.csv',index_col = 0)
+        result_xgb = pd.read_csv('data/xgb_results.csv',index_col = 0)
 
         ###final
 
@@ -274,6 +281,19 @@ def main():
             """
             st.markdown(modelwrite_up, unsafe_allow_html=True)
 
+            st.write(mi_df)
+            st.write(feature_rf_rob)
+            st.write(result_rf_rob)
+            st.write(predict_rf)
+
+            fig = px.bar(mi_df, mi_df['features'], mi_df['mi Stat'])
+            st.plotly_chart(fig)
+
+            fig = px.bar(feature_rf_rob, feature_rf_rob['features'], feature_rf_rob['importance'])
+            st.plotly_chart(fig)
+
+
+
 
 
         if st.sidebar.checkbox('xgBoost Model'):
@@ -288,6 +308,13 @@ def main():
             xgBoost Write up
             """
             st.markdown(modelwrite_up, unsafe_allow_html=True)
+
+            st.write(feature_xgb)
+            st.write(predict_xgb)
+            st.write(result_xgb)
+
+            fig = px.bar(feature_xgb, feature_xgb['features'], feature_xgb['importance'])
+            st.plotly_chart(fig)
 
         if st.sidebar.checkbox('Final Model'):
             html_temp = """
