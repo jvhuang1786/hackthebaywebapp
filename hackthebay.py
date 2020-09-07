@@ -26,6 +26,12 @@ def main():
         """
         st.markdown(title_page,unsafe_allow_html=True)
 
+        title_write = """
+        put writing here Jen for intro
+        """
+
+        st.markdown(title_write,unsafe_allow_html=True)
+
         ##########
         #Load DataFrames here for charts
 
@@ -39,6 +45,12 @@ def main():
             """
             st.markdown(html_temp,unsafe_allow_html=True)
 
+                title_write = """
+                Intro of Chesapeake bay problems
+                """
+
+                st.markdown(title_write,unsafe_allow_html=True)
+
         if st.sidebar.checkbox('Assesment and Plan of Action'):
             html_temp = """
             <div style="background-color:#33A2FF;padding:1px">
@@ -47,11 +59,13 @@ def main():
             """
             st.markdown(html_temp,unsafe_allow_html=True)
 
-        title_write = """
-        put writing here Jen
-        """
+            title_write = """
+            TLDR of model and plan 
+            """
 
-        st.markdown(title_write,unsafe_allow_html=True)
+            st.markdown(title_write,unsafe_allow_html=True)
+
+
 
 
 #Data Preparation
@@ -64,8 +78,24 @@ def main():
         """
         st.markdown(html_temp,unsafe_allow_html=True)
 
+        explorationwrite_up = """
+        Jen write here for exploration intro
+        """
+        st.markdown(explorationwrite_up, unsafe_allow_html=True)
+
+        image = Image.open('images/oyster2.png')
+        st.image(image, width = 800)
+
         ##########
         #Load DataFrames here for charts
+
+
+        ###Weather
+
+
+        ###Land LandCover
+
+        ###Water Quality
 
         ##########
 
@@ -77,6 +107,11 @@ def main():
             """
             st.markdown(html_temp,unsafe_allow_html=True)
 
+            explorationwrite_up = """
+            Landcover clean up method and collection
+            """
+            st.markdown(explorationwrite_up, unsafe_allow_html=True)
+
         if st.sidebar.checkbox('Weather and Air condition Data prep'):
             html_temp = """
             <div style="background-color:#33A2FF;padding:1px">
@@ -84,6 +119,11 @@ def main():
             </div>
             """
             st.markdown(html_temp,unsafe_allow_html=True)
+
+            explorationwrite_up = """
+            Air and Weather Quality clean up and collection
+            """
+            st.markdown(explorationwrite_up, unsafe_allow_html=True)
 
         if st.sidebar.checkbox('Water Quality Data prep'):
             html_temp = """
@@ -93,13 +133,12 @@ def main():
             """
             st.markdown(html_temp,unsafe_allow_html=True)
 
-        explorationwrite_up = """
-        Jen write here
-        """
-        st.markdown(explorationwrite_up, unsafe_allow_html=True)
+            explorationwrite_up = """
+            Given dataset and merging of dataset
+            """
+            st.markdown(explorationwrite_up, unsafe_allow_html=True)
 
-        image = Image.open('images/oyster2.png')
-        st.image(image, width = 800)
+
 
 
 #Data Visualization
@@ -112,8 +151,26 @@ def main():
         """
         st.markdown(html_temp,unsafe_allow_html=True)
 
+        vizwrite_up = """
+        Viz intro here
+
+        ```python
+        This is how I write code here.
+        ```
+        """
+        st.markdown(vizwrite_up, unsafe_allow_html=True)
+
+        image = Image.open('images/oyster2.png')
+        st.image(image, width = 800)
+
         ##########
         #Load DataFrames here for charts
+
+        ###Water Quality
+        df_water = pd.read_csv('data/dfnitro.csv')
+
+
+        ###LandCover
 
         ##########
 
@@ -125,6 +182,13 @@ def main():
             """
             st.markdown(html_temp,unsafe_allow_html=True)
 
+            vizwrite_up = """
+            Water Quality with Chemical Compound write up
+
+
+            """
+            st.markdown(vizwrite_up, unsafe_allow_html=True)
+
         if st.sidebar.checkbox('Land Cover, HUC12_ relation to Nitrogen'):
             html_temp = """
             <div style="background-color:#33A2FF;padding:1px">
@@ -133,17 +197,12 @@ def main():
             """
             st.markdown(html_temp,unsafe_allow_html=True)
 
+            vizwrite_up = """
+            Land cover visualization here
 
-        vizwrite_up = """
-        Jen write here
-        ```python
-        This is how I write code here.
-        ```
-        """
-        st.markdown(vizwrite_up, unsafe_allow_html=True)
+            """
+            st.markdown(vizwrite_up, unsafe_allow_html=True)
 
-        image = Image.open('images/oyster2.png')
-        st.image(image, width = 800)
 
 #Nitrogen Modeling
     elif option == 'Total Nitrogen Model':
@@ -155,8 +214,36 @@ def main():
         """
         st.markdown(html_temp,unsafe_allow_html=True)
 
+
+        modelwrite_up = """
+        Jen write intro here
+        """
+        st.markdown(modelwrite_up, unsafe_allow_html=True)
+
+        image = Image.open('images/oyster2.png')
+        st.image(image, width = 800)
+
         ##########
         #Load DataFrames here for charts
+        df_main = pd.read_csv('data/model_data_enc.csv', index_col = 0)
+        df_main = df_main.set_index('new_date')
+
+        ###CatBoost
+
+        ###Randomforest
+        mi_df = pd.read_csv('data/mi_rf.csv', index_col = 0)
+        feature_rf_rob = pd.read_csv('data/featureimprf_rob.csv')
+        predict_rf = pd.read_csv('data/rfpredictions_df.csv')
+        result_rf_rob = pd.read_csv('data/rf_result_robust.csv')
+        feature_rf_std = pd.read_csv('data/featureimprf_scale.csv')
+        result_rf_std = pd.read_csv('data/rf_result_standard.csv')
+
+        ###xgBoost
+        feature_xgb = pd.read_csv('data/featuresimpxgb.csv')
+        predict_xgb = pd.read_csv('data/predictxgbdf.csv')
+        result_xgb = pd.read_csv('data/xgb_results.csv')
+
+        ###final
 
         ##########
 
@@ -168,6 +255,11 @@ def main():
             """
             st.markdown(html_temp,unsafe_allow_html=True)
 
+            modelwrite_up = """
+            Catboost Write up
+            """
+            st.markdown(modelwrite_up, unsafe_allow_html=True)
+
         if st.sidebar.checkbox('RandomForest Model'):
             html_temp = """
             <div style="background-color:#33A2FF;padding:1px">
@@ -175,6 +267,11 @@ def main():
             </div>
             """
             st.markdown(html_temp,unsafe_allow_html=True)
+
+            modelwrite_up = """
+            RandomForest Write up
+            """
+            st.markdown(modelwrite_up, unsafe_allow_html=True)
 
         if st.sidebar.checkbox('xgBoost Model'):
             html_temp = """
@@ -184,6 +281,11 @@ def main():
             """
             st.markdown(html_temp,unsafe_allow_html=True)
 
+            modelwrite_up = """
+            xgBoost Write up
+            """
+            st.markdown(modelwrite_up, unsafe_allow_html=True)
+
         if st.sidebar.checkbox('Final Model'):
             html_temp = """
             <div style="background-color:#33A2FF;padding:1px">
@@ -192,14 +294,13 @@ def main():
             """
             st.markdown(html_temp,unsafe_allow_html=True)
 
+            modelwrite_up = """
+            Final Model Write up
+            """
+            st.markdown(modelwrite_up, unsafe_allow_html=True)
 
-        modelwrite_up = """
-        Jen write here
-        """
-        st.markdown(modelwrite_up, unsafe_allow_html=True)
 
-        image = Image.open('images/oyster2.png')
-        st.image(image, width = 800)
+
 
     elif option == 'About The Team':
         st.title('Data Preparation')
