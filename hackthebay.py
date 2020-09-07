@@ -45,11 +45,11 @@ def main():
             """
             st.markdown(html_temp,unsafe_allow_html=True)
 
-                title_write = """
-                Intro of Chesapeake bay problems
-                """
+            title_write = """
+            Intro of Chesapeake bay problems
+            """
 
-                st.markdown(title_write,unsafe_allow_html=True)
+            st.markdown(title_write,unsafe_allow_html=True)
 
         if st.sidebar.checkbox('Assesment and Plan of Action'):
             html_temp = """
@@ -60,7 +60,7 @@ def main():
             st.markdown(html_temp,unsafe_allow_html=True)
 
             title_write = """
-            TLDR of model and plan 
+            TLDR of model and plan
             """
 
             st.markdown(title_write,unsafe_allow_html=True)
