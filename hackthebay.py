@@ -26,6 +26,11 @@ def main():
         """
         st.markdown(title_page,unsafe_allow_html=True)
 
+        ##########
+        #Load DataFrames here for charts
+
+        ##########
+
         if st.sidebar.checkbox('Pollution in the Chesapeake Bay'):
             html_temp = """
             <div style="background-color:#33A2FF;padding:1px">
@@ -58,6 +63,11 @@ def main():
         </div>
         """
         st.markdown(html_temp,unsafe_allow_html=True)
+
+        ##########
+        #Load DataFrames here for charts
+
+        ##########
 
         if st.sidebar.checkbox('Land Cover Data Collection and Prep'):
             html_temp = """
@@ -101,6 +111,11 @@ def main():
         </div>
         """
         st.markdown(html_temp,unsafe_allow_html=True)
+
+        ##########
+        #Load DataFrames here for charts
+
+        ##########
 
         if st.sidebar.checkbox('Water Quality Compounds Visualization'):
             html_temp = """
@@ -170,11 +185,11 @@ def main():
             st.markdown(html_temp,unsafe_allow_html=True)
 
         if st.sidebar.checkbox('Final Model'):
-                html_temp = """
-                <div style="background-color:#33A2FF;padding:1px">
-                <h4 style="color:#212F3D;text-align:center;">Final Model</h4>
-                </div>
-                """
+            html_temp = """
+            <div style="background-color:#33A2FF;padding:1px">
+            <h4 style="color:#212F3D;text-align:center;">Final Model</h4>
+            </div>
+            """
             st.markdown(html_temp,unsafe_allow_html=True)
 
 
