@@ -7,4 +7,5 @@ Pillow==7.2.0
 plotly==4.8.2
 streamlit==0.66.0
 pybase64==1.0.1
+shap==0.36.0
 xlrd>=1.0.0
