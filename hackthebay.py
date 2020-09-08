@@ -13,22 +13,29 @@ image = Image.open('images/oyster.png')
 st.image(image, width = 800)
 
 def main():
-    activities = ['Intro to the Chesapeake Bay Challenge', 'Data Preparation',
+    activities = ['Intro: About The Challenge', 'Data Preparation',
     'Data Visualization', 'Total Nitrogen Model', 'About The Team']
     option = st.sidebar.selectbox('Selection Option:', activities)
 
 #Intro
-    if option == 'Intro to the Chesapeake Bay Challenge':
-        st.title('Intro to the Chesapeake Bay Challenge')
+    if option == 'Intro: About The Challenge':
+        st.title('Introduction: About The Challenge')
         title_page = """
-        <div style="background-color:#33A2FF;padding:1px">
-        <h3 style="color:#313F3D;text-align:center;">Intro to the Chesapeake Bay Challenge</h3>
+        <div style="background-color:#33A2FF;padding:2px">
+        <h3 style="color:#313F3D;text-align:center;">Hack The Bay</h3>
         </div>
         """
         st.markdown(title_page,unsafe_allow_html=True)
 
         title_write = """
-        put writing here Jen for intro
+
+        As part of the eight-week Hack The Bay challenge to model water quality,
+        we explored how various land use, weather, and other factors are tied to indicators
+        of pollution using data from the Chesapeake Monitoring Cooperative and Chesapeake Bay Program,
+        as well as supplementary geospatial datasets. The resulting model provides
+        visibility so that useful predictors might inform timely decisions and inspire action
+        to improve the health of the Chesapeake Bay and its stakeholders.
+
         """
 
         st.markdown(title_write,unsafe_allow_html=True)
@@ -40,7 +47,7 @@ def main():
 
         if st.sidebar.checkbox('Pollution in the Chesapeake Bay'):
             html_temp = """
-            <div style="background-color:#33A2FF;padding:1px">
+            <div style="background-color:#33A2FF;padding:7px">
             <h4 style="color:#212F3D;text-align:center;">Pollution in the Chesapeake Bay</h4>
             </div>
             """
@@ -52,10 +59,10 @@ def main():
 
             st.markdown(title_write,unsafe_allow_html=True)
 
-        if st.sidebar.checkbox('Assesment and Plan of Action'):
+        if st.sidebar.checkbox('Assessment and Plan of Action'):
             html_temp = """
-            <div style="background-color:#33A2FF;padding:1px">
-            <h4 style="color:#212F3D;text-align:center;">Assesment and Plan of Action</h4>
+            <div style="background-color:#33A2FF;padding:7px">
+            <h4 style="color:#212F3D;text-align:center;">Assessment and Plan of Action</h4>
             </div>
             """
             st.markdown(html_temp,unsafe_allow_html=True)
