@@ -9,8 +9,8 @@ from PIL import Image
 
 #set title
 
-image = Image.open('images/oyster.png')
-st.image(image, width = 800)
+image1 = Image.open('images/river-in-virginia.jpg')
+st.image(image1, width = 700)
 
 def main():
     activities = ['Intro: About The Challenge', 'Data Preparation',
@@ -29,12 +29,12 @@ def main():
 
         title_write = """
 
-        As part of the eight-week Hack The Bay challenge to model water quality,
-        we explored how various land use, weather, and other factors are tied to indicators
-        of pollution using data from the Chesapeake Monitoring Cooperative and Chesapeake Bay Program,
-        as well as supplementary geospatial datasets. The resulting model provides
-        visibility so that useful predictors might inform timely decisions and inspire action
-        to improve the health of the Chesapeake Bay and its stakeholders.
+        The usefulness of water quality data collected by the Chesapeake
+        Monitoring Cooperative (CMC) and its partners is a testament to how
+        important it is to gain clarity into the ways we affect the health of
+        the bay and the communities that depend on it. It can also inform the
+        decisions we make to sustain progress, prioritize initiatives, and balance
+        interests among the many stakeholders connected to the bay.
 
         """
 
@@ -54,7 +54,13 @@ def main():
             st.markdown(html_temp,unsafe_allow_html=True)
 
             title_write = """
-            Intro of Chesapeake bay problems
+
+            [Some more info about pollution]
+
+            Based on our knowledge that pollution can be Point Source or Non-Point
+            Source, we wanted to look into factors that influence pollutants' travel
+            into the bay and get more granularity into which data best informs a model.
+
             """
 
             st.markdown(title_write,unsafe_allow_html=True)
@@ -68,7 +74,16 @@ def main():
             st.markdown(html_temp,unsafe_allow_html=True)
 
             title_write = """
-            TLDR of model and plan
+
+            As part of the eight-week Hack The Bay Hackathon to model water quality
+            (Challenge #3), we explored how various land use, weather, and other
+            factors are tied to indicators of pollution using data from CMC and partners,
+            as well as supplementary geospatial datasets. The resulting model provides
+            visibility so that useful predictors might inform timely decisions and inspire
+            action.
+
+            Please select the next dropdown: Features.
+
             """
 
             st.markdown(title_write,unsafe_allow_html=True)
