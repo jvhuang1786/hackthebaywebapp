@@ -205,13 +205,13 @@ def main():
             st.markdown(vizwrite_up, unsafe_allow_html=True)
 
             image = Image.open('images/DO_Active_Chlorophyll.png')
-            st.image(image, width = 800)
+            st.image(image, width = 500)
             image = Image.open('images/Nitrogen_Phosphorus.png')
-            st.image(image, width = 800)
+            st.image(image, width = 500)
             image = Image.open('images/pH_Temp_Salinity.png')
-            st.image(image, width = 800)
+            st.image(image, width = 500)
             image = Image.open('images/Suspended_Solids_Turbidity.png')
-            st.image(image, width = 800)
+            st.image(image, width = 500)
 
 #Nitrogen Modeling
     elif option == 'Total Nitrogen Model':
@@ -257,8 +257,8 @@ def main():
         df_main = df_main.set_index('new_date')
 
         ###CatBoost
-        feature_cat = pd.read_csv('data/catboost_feature_importance.csv')
-        predict_cat = pd.read_csv('data/catboost_predictions_df.csv')
+        feature_cat = pd.read_csv('data/catboost_feature_importance.csv', index_col = 0)
+        predict_cat = pd.read_csv('data/catboost_predictions_df.csv', index_col = 0)
 
         ###xgBoost
         feature_xgb = pd.read_csv('data/allfeatimp.csv', index_col = 0)
@@ -284,10 +284,10 @@ def main():
 
             st.write(predict_cat.head(10))
             st.write(feature_cat.head())
-            # fig = px.bar(feature_cat, feature_xgb['features'], feature_xgb['importance'])
-            # st.plotly_chart(fig)
+            fig = px.bar(feature_cat, feature_cat['Feature Id'], feature_cat['Importances'])
+            st.plotly_chart(fig)
             image = Image.open('images/SHAP.png')
-            st.image(image, width = 800)
+            st.image(image, width = 500)
 
 
 
