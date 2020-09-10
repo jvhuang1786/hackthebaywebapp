@@ -204,7 +204,13 @@ def main():
             """
             st.markdown(vizwrite_up, unsafe_allow_html=True)
 
-            image = Image.open('images/oyster2.png')
+            image = Image.open('images/DO_Active_Chlorophyll.png')
+            st.image(image, width = 800)
+            image = Image.open('images/Nitrogen_Phosphorus.png')
+            st.image(image, width = 800)
+            image = Image.open('images/pH_Temp_Salinity.png')
+            st.image(image, width = 800)
+            image = Image.open('images/Suspended_Solids_Turbidity.png')
             st.image(image, width = 800)
 
 #Nitrogen Modeling
@@ -236,9 +242,11 @@ def main():
         explained_variance_score 0.8399821265302834
         RMSE                     0.8746053286890739
         ```
-        CatBoost
+        CatBoost Results
         ```python
-        Berenices model results here
+        r2                       0.8401995362308845
+        explaned_variance_score  0.8402718767819098
+        RMSE                     0.9249663789834368
         ```
         """
         st.markdown(modelwrite_up, unsafe_allow_html=True)
@@ -249,6 +257,8 @@ def main():
         df_main = df_main.set_index('new_date')
 
         ###CatBoost
+        feature_cat = pd.read_csv('data/catboost_feature_importance.csv')
+        predict_cat = pd.read_csv('data/catboost_predictions_df.csv')
 
         ###xgBoost
         feature_xgb = pd.read_csv('data/allfeatimp.csv', index_col = 0)
@@ -271,6 +281,14 @@ def main():
             Catboost Write up
             """
             st.markdown(modelwrite_up, unsafe_allow_html=True)
+
+            st.write(predict_cat.head(10))
+            st.write(feature_cat.head())
+            # fig = px.bar(feature_cat, feature_xgb['features'], feature_xgb['importance'])
+            # st.plotly_chart(fig)
+            image = Image.open('images/SHAP.png')
+            st.image(image, width = 800)
+
 
 
         if st.sidebar.checkbox('xgBoost Model'):
