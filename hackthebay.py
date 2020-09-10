@@ -9,12 +9,12 @@ from PIL import Image
 
 #set title
 
-image = Image.open('images/virginia.jpg')
+image = Image.open('images/oyster.png')
 st.image(image, width = 800)
 
 def main():
     activities = ['Intro: About The Challenge', 'Data Preparation',
-    'Total Nitrogen Model', 'About The Team']
+    'Total Nitrogen Model', 'Team & Footnotes']
     option = st.sidebar.selectbox('Selection Option:', activities)
 
 #Intro
@@ -57,6 +57,8 @@ def main():
             Intro of Chesapeake bay problems
             Jen Section approach to the problem and data cleaning as well with features
             chosen and a little bit of data wrangling
+
+            [Fill in once most other stuff is settled.]
             """
 
             st.markdown(title_write,unsafe_allow_html=True)
@@ -74,6 +76,9 @@ def main():
             Why was total nitrogen chosen
             what features were chosen to predict total Nitrogen
             some of the graphs and predictions
+
+            [Fill in once most other stuff is settled.]
+
             """
 
             st.markdown(title_write,unsafe_allow_html=True)
@@ -86,18 +91,22 @@ def main():
         st.title('Data Preparation')
         html_temp = """
         <div style="background-color:#33A2FF;padding:1px">
-        <h3 style="color:#212F3D;text-align:center;">Data Preparation</h3>
         </div>
         """
         st.markdown(html_temp,unsafe_allow_html=True)
 
         explorationwrite_up = """
-        Bryans land cover, narr, epa nitro oxide and merge with total nitrogen
+        ## CMC/CBP Data Preparation
+
+        We filtered the provided dataset for total nitrogen. Then, we
+        aggregated data by date and longitude + latitude, and took a mean of the
+        measure value, to obtain one reading for each day and each location
+        that samples were taken.
         """
         st.markdown(explorationwrite_up, unsafe_allow_html=True)
 
         image = Image.open('images/oyster2.png')
-        st.image(image, width = 800)
+        st.image(image, width = 700)
 
         ##########
         #Load DataFrames here for charts
@@ -113,20 +122,117 @@ def main():
 
         ##########
 
-        if st.sidebar.checkbox('Data Prep and Wrangling'):
+        if st.sidebar.checkbox('Preparing: Land Cover Data'):
             html_temp = """
             <div style="background-color:#33A2FF;padding:1px">
-            <h4 style="color:#212F3D;text-align:center;">Data Prep and Wrangling</h4>
             </div>
             """
             st.markdown(html_temp,unsafe_allow_html=True)
 
             explorationwrite_up = """
-            Landcover clean up method and collection just a few sentences
-            and images to add in
-            NARR data wrangle
-            EPA data wrangle nitrogen oxide
-            Merging with water_final to predict nitrogen
+
+            ## Preparing: Land Cover Data
+
+            Using land cover data from the Multi-Resolution Land Characteristics
+            Consortium (MRLC) National Land Cover Viewer and the watershed HUC12
+            boundaries shapefile (2), we obtained the following features:
+            * Land cover % usage for each code in the NLCD legend
+            * The mean of the pixel values for each segment
+            * The area of each segment in acres
+
+            """
+            st.markdown(explorationwrite_up, unsafe_allow_html=True)
+
+        if st.sidebar.checkbox('Preparing: Weather Data'):
+            html_temp = """
+            <div style="background-color:#33A2FF;padding:1px">
+            </div>
+            """
+            st.markdown(html_temp,unsafe_allow_html=True)
+
+            explorationwrite_up ="""
+
+            ## Preparing: Weather Data
+
+            We obtained weather data from North American Regional Reanalysis.
+            The features we used were:
+            * Air Temperature
+            * Humidity
+            * Cloud Cover
+            * Surface Air Temperature
+            * Surface Runoff
+            * Wind Components
+            * Precipitation
+
+            We then extracted the above data for dates and location (longitude +
+            latitude) relevant with each pollutant observation.
+
+            """
+
+            st.markdown(explorationwrite_up, unsafe_allow_html=True)
+
+        if st.sidebar.checkbox('Creating: Mean Encoded HUC12'):
+            html_temp = """
+            <div style="background-color:#33A2FF;padding:1px">
+            </div>
+            """
+            st.markdown(html_temp,unsafe_allow_html=True)
+
+            explorationwrite_up = """
+
+            ## Creating: Mean Encoded HUC12
+
+            This feature is a mean of total nitrogen for each HUC code with some
+            regularization. We used it instead of label encoding the HUC codes because
+            there were more than 300 HUC12 locations, and instead of One Hot Encoding
+            because OHE would introduce a large amount of new features to the data.
+            Mean encoding introduces the correlation between the categories and the
+            target variable in only one additional feature. (3)
+
+            """
+            st.markdown(explorationwrite_up, unsafe_allow_html=True)
+
+        if st.sidebar.checkbox('Creating: Distance from Outflow'):
+            html_temp = """
+            <div style="background-color:#33A2FF;padding:1px">
+            </div>
+            """
+            st.markdown(html_temp,unsafe_allow_html=True)
+
+            explorationwrite_up = """
+
+            ## Creating: Distance from Outflow
+
+            This is the distance from each sample location (latitude + longitude)
+            from the outflow of the Bay (36.995833, -75.959444). We measured distance
+            as the geodesic distance between two coordinates in miles. (4)
+
+            """
+
+            st.markdown(explorationwrite_up, unsafe_allow_html=True)
+
+        if st.sidebar.checkbox('Creating: NO2 from Point Sources'):
+            html_temp = """
+            <div style="background-color:#33A2FF;padding:1px">
+            </div>
+            """
+            st.markdown(html_temp,unsafe_allow_html=True)
+
+            explorationwrite_up = """
+
+            ## Creating: NO2 from Point Sources
+
+            This feature represents all NO2 pollutants from correlated point source
+            locations in the airshed by year for each HUC12 segment.
+
+            Combining air emissions data for stationary sources from four EPA air
+            programs, we transformed and aggregated NO2 emissions by HUC12 code
+            and year, and merged it with NO2 emissions by Point Source and year.
+            The data was correlated and filtered to only correlations >=.6 and <1.
+            All correlated point sources for each HUC12 segment were aggregated by
+            year. For those missing values, we used a mean of the HUC12 correlated
+            point sources. (5)
+
             """
             st.markdown(explorationwrite_up, unsafe_allow_html=True)
 
@@ -139,9 +245,7 @@ def main():
             st.markdown(html_temp,unsafe_allow_html=True)
 
             vizwrite_up = """
-            exploration of the chemicals in relation to nitrogen or
-            other interesting finds from Tim.
-            exploring the relation of other chemicals with nitrogen
+            exploration of the chemicals in relation to nitrogen or other interesting finds from Tim.
 
             ```python
             This is how I write code here.
@@ -150,7 +254,7 @@ def main():
             st.markdown(vizwrite_up, unsafe_allow_html=True)
 
             image = Image.open('images/oyster2.png')
-            st.image(image, width = 800)
+            st.image(image, width = 700)
 
 #Nitrogen Modeling
     elif option == 'Total Nitrogen Model':
@@ -441,22 +545,135 @@ def main():
 
 
 
-    elif option == 'About The Team':
-        st.title('Data Preparation')
+    elif option == 'Team & Footnotes':
+        st.title('Our Team')
         html_temp = """
         <div style="background-color:#33A2FF;padding:1px">
-        <h3 style="color:#212F3D;text-align:center;">Data Preparation</h3>
         </div>
         """
         st.markdown(html_temp,unsafe_allow_html=True)
 
         about_write = """
-        One sentence about each team member
-        Link to github repo
+
+        ## Berenice
+        about you
+
+        online profile link
+
+        github
+
+        ## Justin
+        about you
+
+        online profile link
+
+        github
+
+        ## Bryan
+        about you
+
+        online profile link
+
+        github
+
+        ## Tim
+        about you
+
+        online profile link
+
+        github
+
+        ## Jen
+        about you
+
+        online profile link
+
+        github
+
         """
 
         st.markdown(about_write,unsafe_allow_html=True)
 
+        st.title('Footnotes')
+        st.markdown(html_temp,unsafe_allow_html=True)
+
+        about_write = """
+
+        ## (1) Weather data
+
+        [North American Regional Reanalysis (NARR)](https://www.ncdc.noaa.gov/data-access/model-data/model-datasets/north-american-regional-reanalysis-narr)
+
+        Data downloaded via: ftp://ftp.cdc.noaa.gov/Datasets/NARR/monolevel
+
+        ## (2) Land cover data
+
+        We downloaded land cover data from the Multi-Resolution Land Characteristics
+        Consortium (MRLC) National Land Cover Viewer. A bounding box of the watershed
+        (-80.44707800, 36.73004000, -74.83524400, 42.80672000) was used to download
+        the relevant 2016 NLCD data in the form of a .tiff raster file. The raster
+        file displayed 20 different colors that corresponded with different types
+        of land cover. We used this with the watershed HUC12 boundaries shapefile
+        provided by the organizers of Hack The Bay.
+
+        With the two files loaded into QGIS, the watershed HUC12 boundaries shapefile
+        was used to mask the land cover data and provide the land cover features
+        of the .tiff file by HUC12 code. We employed the zonal statistics package
+        on the resulting output to determine the mean pixel value of each HUC12
+        segment, and a zonal histogram on each segment counted the totals for each
+        pixel color/value. We downloaded this layer from QGIS and imported it into
+        Python, where the layer features were imported and each HUC12 segment histogram
+        was normalized so that each HUC12 segment had a total sum of 1. We then
+        merged the information with the existing data on each HUC12 location to
+        obtain the features we used.
+
+        [HUC12 boundaries shapefile](https://nrcs.app.box.com/v/huc/file/532373547877)
+
+        [National Land Cover Database 2016 (NLCD2016) Legend](https://www.mrlc.gov/data/legends/national-land-cover-database-2016-nlcd2016-legend)
+
+        ## (3) Encoded HUC12
+
+        To address data leakage and introduce regularization, a k-fold method was
+        utilized, using the out of fold mean.
+
+        [Target encoding categorical variables (Categorically Speaking)](https://mlbook.explained.ai/catvars.html#target-encoding)
+
+        [Mean Encoding (Geeksforgeeks)](https://www.geeksforgeeks.org/mean-encoding-machine-learning/)
+
+        [Target Encoding (H2O 3.30.1.2 documentation)](https://docs.h2o.ai/h2o/latest-stable/h2o-docs/data-munging/target-encoding.html)
+
+        ## (4) Distance from Outflow
+
+        [Chesapeake Bay outflow location (Wikipedia)](https://en.wikipedia.org/wiki/Chesapeake_Bay)
+
+        ## (5) NO2 from Point Sources
+
+        [Air Emissions Dataset (EPA)](https://echo.epa.gov/tools/data-downloads)
+        Combined air emissions data for stationary sources are from four EPA air programs:
+        - National Emissions Inventory (NEI)
+        - Greenhouse Gas Reporting Program (GHGRP)
+        - Toxic Release Inventory (TRI)
+        - Clean Air Markets
+
+        Emissions are presented as facility-level aggregates and organized by pollutant
+        and EPA program.
+
+        The data was loaded and filtered to only states within the Chesapeake Bay
+        Watershed.
+
+        [The Chesapeake’s Airshed (Chesapeake Bay Foundation)](https://www.cbf.org/about-the-bay/maps/geography/the-chesapeakes-airshed.html)
+
+        [Maps (Chesapeake Bay Program)](https://www.chesapeakebay.net/what/maps/chesapeake_bay_airshed#:~:text=The%20Airshed)
+
+        The dataset was then filtered to only the NO2 pollutant emission.
+        The original dataset was transformed and aggregated by HUC12 code and year
+        and merged by year with the pollutant emissions of NO2 by year by Point Source.
+        The data was correlated and filtered to only correlations >=.6 and <1.
+        All correlated point sources for each HUC12 segment were aggregated by year.
+        For those missing values, we used a mean of the HUC12 correlated point sources.
+
+        """
+
+        st.markdown(about_write,unsafe_allow_html=True)
 
 
 
