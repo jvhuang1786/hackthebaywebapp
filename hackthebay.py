@@ -113,42 +113,20 @@ def main():
 
         ##########
 
-        if st.sidebar.checkbox('Land Cover Data Collection and Prep'):
+        if st.sidebar.checkbox('Data Prep and Wrangling'):
             html_temp = """
             <div style="background-color:#33A2FF;padding:1px">
-            <h4 style="color:#212F3D;text-align:center;">Land Cover Data Collection andd Prep</h4>
+            <h4 style="color:#212F3D;text-align:center;">Data Prep and Wrangling</h4>
             </div>
             """
             st.markdown(html_temp,unsafe_allow_html=True)
 
             explorationwrite_up = """
-            Landcover clean up method and collection just a few sentences and images to add in
-            """
-            st.markdown(explorationwrite_up, unsafe_allow_html=True)
-
-        if st.sidebar.checkbox('Weather and Air condition Data prep'):
-            html_temp = """
-            <div style="background-color:#33A2FF;padding:1px">
-            <h4 style="color:#212F3D;text-align:center;">Weather and Air condition Data prep</h4>
-            </div>
-            """
-            st.markdown(html_temp,unsafe_allow_html=True)
-
-            explorationwrite_up = """
-            Air and Weather Quality clean up and collection a few sentences to add in
-            """
-            st.markdown(explorationwrite_up, unsafe_allow_html=True)
-
-        if st.sidebar.checkbox('Water Quality Data and Nitrogen Oxide Data'):
-            html_temp = """
-            <div style="background-color:#33A2FF;padding:1px">
-            <h4 style="color:#212F3D;text-align:center;">Water Quality Data and Nitrogen Oxide Data</h4>
-            </div>
-            """
-            st.markdown(html_temp,unsafe_allow_html=True)
-
-            explorationwrite_up = """
-            EPA dataset combined with nitrogen
+            Landcover clean up method and collection just a few sentences
+            and images to add in
+            NARR data wrangle
+            EPA data wrangle nitrogen oxide
+            Merging with water_final to predict nitrogen
             """
             st.markdown(explorationwrite_up, unsafe_allow_html=True)
 
@@ -161,7 +139,9 @@ def main():
             st.markdown(html_temp,unsafe_allow_html=True)
 
             vizwrite_up = """
-            exploration of the chemicals in relation to nitrogen or other interesting finds from Tim.
+            exploration of the chemicals in relation to nitrogen or
+            other interesting finds from Tim.
+            exploring the relation of other chemicals with nitrogen 
 
             ```python
             This is how I write code here.
