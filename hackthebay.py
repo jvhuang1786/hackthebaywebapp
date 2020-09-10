@@ -14,7 +14,7 @@ st.image(image, width = 800)
 
 def main():
     activities = ['Intro: About The Challenge', 'Data Preparation',
-    'Data Visualization', 'Total Nitrogen Model', 'About The Team']
+    'Total Nitrogen Model', 'About The Team']
     option = st.sidebar.selectbox('Selection Option:', activities)
 
 #Intro
@@ -55,20 +55,25 @@ def main():
 
             title_write = """
             Intro of Chesapeake bay problems
+            Jen Section approach to the problem and data cleaning as well with features
+            chosen and a little bit of data wrangling
             """
 
             st.markdown(title_write,unsafe_allow_html=True)
 
-        if st.sidebar.checkbox('Assessment and Plan of Action'):
+        if st.sidebar.checkbox('Total Nitrogen Model Summary'):
             html_temp = """
             <div style="background-color:#33A2FF;padding:7px">
-            <h4 style="color:#212F3D;text-align:center;">Assessment and Plan of Action</h4>
+            <h4 style="color:#212F3D;text-align:center;">Total Nitrogen Model Summary</h4>
             </div>
             """
             st.markdown(html_temp,unsafe_allow_html=True)
 
             title_write = """
             TLDR of model and plan
+            Why was total nitrogen chosen
+            what features were chosen to predict total Nitrogen
+            some of the graphs and predictions
             """
 
             st.markdown(title_write,unsafe_allow_html=True)
@@ -87,7 +92,7 @@ def main():
         st.markdown(html_temp,unsafe_allow_html=True)
 
         explorationwrite_up = """
-        Jen write here for exploration intro
+        Bryans land cover, narr, epa nitro oxide and merge with total nitrogen
         """
         st.markdown(explorationwrite_up, unsafe_allow_html=True)
 
@@ -104,6 +109,7 @@ def main():
         ###Land LandCover
 
         ###Water Quality
+        df_water = pd.read_csv('data/dfnitro.csv', index_col = 0)
 
         ##########
 
@@ -116,7 +122,7 @@ def main():
             st.markdown(html_temp,unsafe_allow_html=True)
 
             explorationwrite_up = """
-            Landcover clean up method and collection
+            Landcover clean up method and collection just a few sentences and images to add in
             """
             st.markdown(explorationwrite_up, unsafe_allow_html=True)
 
@@ -129,93 +135,42 @@ def main():
             st.markdown(html_temp,unsafe_allow_html=True)
 
             explorationwrite_up = """
-            Air and Weather Quality clean up and collection
+            Air and Weather Quality clean up and collection a few sentences to add in
             """
             st.markdown(explorationwrite_up, unsafe_allow_html=True)
 
-        if st.sidebar.checkbox('Water Quality Data prep'):
+        if st.sidebar.checkbox('Water Quality Data and Nitrogen Oxide Data'):
             html_temp = """
             <div style="background-color:#33A2FF;padding:1px">
-            <h4 style="color:#212F3D;text-align:center;">Water Quality Data prep</h4>
+            <h4 style="color:#212F3D;text-align:center;">Water Quality Data and Nitrogen Oxide Data</h4>
             </div>
             """
             st.markdown(html_temp,unsafe_allow_html=True)
 
             explorationwrite_up = """
-            Given dataset and merging of dataset
+            EPA dataset combined with nitrogen
             """
             st.markdown(explorationwrite_up, unsafe_allow_html=True)
 
-
-
-
-#Data Visualization
-    elif option == 'Data Visualization':
-        st.title('Data Visualization')
-        html_temp = """
-        <div style="background-color:#33A2FF;padding:1px">
-        <h3 style="color:#212F3D;text-align:center;">Data Visualization</h3>
-        </div>
-        """
-        st.markdown(html_temp,unsafe_allow_html=True)
-
-        vizwrite_up = """
-        Viz intro here
-
-        ```python
-        This is how I write code here.
-        ```
-        """
-        st.markdown(vizwrite_up, unsafe_allow_html=True)
-
-        image = Image.open('images/oyster2.png')
-        st.image(image, width = 800)
-
-        ##########
-        #Load DataFrames here for charts
-
-        ###Water Quality
-        df_water = pd.read_csv('data/dfnitro.csv', index_col = 0)
-
-
-        ###LandCover
-
-        ##########
-
-        if st.sidebar.checkbox('Water Quality Compounds Visualization'):
+        if st.sidebar.checkbox('Data Visualizations'):
             html_temp = """
             <div style="background-color:#33A2FF;padding:1px">
-            <h4 style="color:#212F3D;text-align:center;">Water Quality Compounds Visualization</h4>
+            <h4 style="color:#212F3D;text-align:center;">Data Visualizatons</h4>
             </div>
             """
             st.markdown(html_temp,unsafe_allow_html=True)
 
             vizwrite_up = """
-            Water Quality with Chemical Compound write up
+            exploration of the chemicals in relation to nitrogen or other interesting finds from Tim.
 
-
+            ```python
+            This is how I write code here.
+            ```
             """
             st.markdown(vizwrite_up, unsafe_allow_html=True)
 
-            # fig = px.scatter_matrix(predict_rf,
-            #     dimensions=["Actual", "gridRF", "gridRF2"])
-            #
-            # st.plotly_chart(fig)
-
-        if st.sidebar.checkbox('Land Cover, HUC12_ relation to Nitrogen'):
-            html_temp = """
-            <div style="background-color:#33A2FF;padding:1px">
-            <h4 style="color:#212F3D;text-align:center;">Land Cover, HUC12_ relation to Nitrogen</h4>
-            </div>
-            """
-            st.markdown(html_temp,unsafe_allow_html=True)
-
-            vizwrite_up = """
-            Land cover visualization here
-
-            """
-            st.markdown(vizwrite_up, unsafe_allow_html=True)
-
+            image = Image.open('images/oyster2.png')
+            st.image(image, width = 800)
 
 #Nitrogen Modeling
     elif option == 'Total Nitrogen Model':
@@ -229,12 +184,29 @@ def main():
 
 
         modelwrite_up = """
-        Jen write intro here
+        There were two models that were used.  xgBoost and Catboost.  Randomforest was also experimented with
+        however the results when adding nitrogen oxide was not as good as the other two algorithms.
+
+        RandomForest Results:
+
+        ```python
+        r2                       0.6935003647333058
+        explained_variance_score 0.6936163490312466
+        RMSE                     1.2103501514032144
+        ```
+
+        xgBoost Results:
+        ```python
+        r2                       0.8399586734809285
+        explained_variance_score 0.8399821265302834
+        RMSE                     0.8746053286890739
+        ```
+        CatBoost
+        ```python
+        Berenices model results here
+        ```
         """
         st.markdown(modelwrite_up, unsafe_allow_html=True)
-
-        image = Image.open('images/oyster2.png')
-        st.image(image, width = 800)
 
         ##########
         #Load DataFrames here for charts
@@ -243,20 +215,10 @@ def main():
 
         ###CatBoost
 
-        ###Randomforest
-        mi_df = pd.read_csv('data/mi_rf.csv', index_col = 0)
-        mi_df = mi_df.reset_index().sort_values(ascending = False, by = '0')
-        mi_df = mi_df.rename(columns = {'index':'features', '0': 'mi Stat'})
-        feature_rf_rob = pd.read_csv('data/featureimprf_rob.csv', index_col = 0)
-        predict_rf = pd.read_csv('data/rfpredictions_df.csv', index_col = 0)
-        result_rf_rob = pd.read_csv('data/rf_result_robust.csv', index_col = 0)
-        feature_rf_std = pd.read_csv('data/featureimprf_scale.csv', index_col = 0)
-        result_rf_std = pd.read_csv('data/rf_result_standard.csv',index_col = 0)
-
         ###xgBoost
-        feature_xgb = pd.read_csv('data/featuresimpxgb.csv', index_col = 0)
-        predict_xgb = pd.read_csv('data/predictxgbdf.csv',index_col = 0)
-        result_xgb = pd.read_csv('data/xgb_results.csv',index_col = 0)
+        feature_xgb = pd.read_csv('data/allfeatimp.csv', index_col = 0)
+        predict_xgb = pd.read_csv('data/allfeatpredictions_df.csv',index_col = 0)
+        result_xgb = pd.read_csv('data/allfeatresults.csv',index_col = 0)
 
         ###final
 
@@ -275,33 +237,6 @@ def main():
             """
             st.markdown(modelwrite_up, unsafe_allow_html=True)
 
-        if st.sidebar.checkbox('RandomForest Model'):
-            html_temp = """
-            <div style="background-color:#33A2FF;padding:1px">
-            <h4 style="color:#212F3D;text-align:center;">RandomForest Model</h4>
-            </div>
-            """
-            st.markdown(html_temp,unsafe_allow_html=True)
-
-            modelwrite_up = """
-            RandomForest Write up
-            """
-            st.markdown(modelwrite_up, unsafe_allow_html=True)
-
-            st.write(mi_df)
-            st.write(feature_rf_rob)
-            st.write(result_rf_rob)
-            st.write(predict_rf)
-
-            fig = px.bar(mi_df, mi_df['features'], mi_df['mi Stat'])
-            st.plotly_chart(fig)
-
-            fig = px.bar(feature_rf_rob, feature_rf_rob['features'], feature_rf_rob['importance'])
-            st.plotly_chart(fig)
-
-
-
-
 
         if st.sidebar.checkbox('xgBoost Model'):
             html_temp = """
@@ -312,29 +247,216 @@ def main():
             st.markdown(html_temp,unsafe_allow_html=True)
 
             modelwrite_up = """
-            xgBoost Write up
+            The final features used in the final xgb model were:
+
+               * 'areaacres', 'lc_21', 'lc_31', 'lc_41', 'lc_42', 'lc_43', 'lc_52',
+               * lc_71', 'lc_81', 'lc_82', 'lc_90', 'lc_95', 'year', 'week',
+               * 'airtemp_narr', 'precip3_narr', 'humidity_narr', 'cl_cover_narr',
+               * 'sfc_runoff', 'windspeed_narr', 'wdirection_narr', 'precip48_narr',
+               * 'of_dist', 'total Nitrogen Oxide in year'
+
+            A total of 24 features used.
+
+            To arrive to these features and how the features were selected and engineered.
+
+                * A KNN imputer worked best with two nearest neighbors.
+                * A Robust Scaler had a slight advantage overall when doing model experimentation with
+                xgBoot.
+                * Total Nitrogen above 50 was removed as there would most likely be serious Algae Bloom
+                and deemed unsafe to collect water.
+
+
+            Below is the code:
+
+            ```python
+
+            #Preprocessing
+            knnimputer = KNNImputer(n_neighbors=2)
+            scaler_std = StandardScaler()
+            scaler_rob = RobustScaler()
+
+            #StandardScaler worked best before but try RobustScaler
+            knn_impute_scale = make_pipeline(knnimputer, scaler_std)
+            knn_impute_scale1 = make_pipeline(knnimputer, scaler_rob)
+
+            #robust scaler column transformer
+            ct = make_column_transformer(
+                (knn_impute_scale1, ['areaacres', 'lc_21', 'lc_31', 'lc_41', 'lc_42', 'lc_43', 'lc_52',
+                   'lc_71', 'lc_81', 'lc_82', 'lc_90', 'lc_95', 'year', 'week',
+                   'airtemp_narr', 'precip3_narr', 'humidity_narr', 'cl_cover_narr',
+                   'sfc_runoff', 'windspeed_narr', 'wdirection_narr', 'precip48_narr',
+                   'of_dist', 'total Nitrogen Oxide in year']),
+                remainder='passthrough')
+            ```
+
+            Correlated groups were also removed from the original set of features.  There were originally 31
+            total from the merged dataset and this was reduced down to 24.
+
+            ```python
+            #Group correlated features together
+            grouped_features_ls = []
+            correlated_groups = []
+
+            for feature in corrmat.feature1.unique():
+                if feature not in grouped_features_ls:
+
+                    #find all features correlated to a single feature
+                    correlated_block = corrmat[corrmat.feature1 == feature]
+                    grouped_feature_ls = grouped_features_ls + list(correlated_block.feature2.unique()) + [feature]
+
+                    #append the block of features to the list
+                    correlated_groups.append(correlated_block)
+
+            print('found {} correlated groups'.format(len(correlated_groups)))
+            print('out of {} total features'.format(X_train.shape[1]))
+
+
+
+                          feature1 feature2   corr
+            0  lc_24    lc_23   0.9727
+            6  lc_24    lc_22   0.9071
+
+
+               feature1 feature2   corr
+            1   lc_23    lc_24   0.9727
+            2   lc_23    lc_22   0.9344
+            15  lc_23    lc_21   0.7200
+
+
+              feature1 feature2   corr
+            3  lc_22    lc_23   0.9344
+            7  lc_22    lc_24   0.9071
+            9  lc_22    lc_21   0.8304
+
+
+              feature1  feature2   corr
+            4  of_dist  latitude 0.9268
+
+
+               feature1 feature2   corr
+            5  latitude  of_dist 0.9268
+
+
+               feature1 feature2   corr
+            8   lc_21    lc_22   0.8304
+            14  lc_21    lc_23   0.7200
+
+
+                     feature1       feature2   corr
+            10  precip48_narr  precip24_narr 0.8140
+
+
+                     feature1       feature2   corr
+            11  precip24_narr  precip48_narr 0.8140
+
+
+               feature1 feature2   corr
+            12  lc_82    za_mean 0.7942
+
+
+               feature1 feature2   corr
+            13  za_mean  lc_82   0.7942
+
+
+                 feature1 feature2   corr
+            16  longitude  lc_41   0.7025
+
+
+               feature1   feature2   corr
+            17  lc_41    longitude 0.7025
+            ```
+
+            Feature importance was then used to remove features that were higly correlated
+            and had lower feature importance.
+
+            ```python
+            #We can screen using a randomforest second feature group
+            features = ['lc_22'] + ['lc_23'] + ['lc_24']  + ['lc_21']
+            xgb.fit(X_train[features].fillna(0), y_train);
+
+            #get feature importance attributed by random forest model
+            importance = pd.concat([pd.Series(features),
+                                   pd.Series(xgb.feature_importances_)], axis = 1)
+
+            importance.columns = ['feature', 'importance']
+            importance.sort_values(by = 'importance', ascending = False)
+
+
+                feature	importance
+            3	lc_21	0.3180
+            2	lc_24	0.2479
+            0	lc_22	0.2239
+            1	lc_23	0.2101
+            ```
+            RandomizedSearchCV was used to do hypertuning to the xgBoost Algo.
+
+            ```python
+            #Set Parameters
+            params = {}
+            params['xgbregressor__max_depth'] = np.arange(0, 1100,10)
+            params['xgbregressor__n_estimators'] = np.arange(0, 1000,10)
+            params['xgbregressor__max_samples'] = np.arange(0, 1100,10)
+            params['xgbregressor__min_child_weight'] = np.arange(1,11,1)
+            params['xgbregressor__importance_type'] = ['weight', 'gain', 'cover', 'total_gain', 'total_cover']
+
+            #Grid for hypertuning
+            gridRF = RandomizedSearchCV(pipeline, params, cv = 5, n_jobs = -1, random_state = 0, n_iter = 30, scoring = 'r2')
+
+            #Robust Scaler
+            gridRF.fit(X_train,y_train);
+
+            #Robust Scaler prediction
+            y_pred_final = gridRF.predict(X_test)
+
+            #Robust Metrics
+            print(r2_score(y_test, y_pred_final))
+            print(explained_variance_score(y_test, y_pred_final))
+            print(np.sqrt(mean_squared_error(y_test, y_pred_final)))
+            ```
+
+            This gave a r2, explained variance and rmse of:
+
+            ```python
+
+            r2                          0.8399586734809285
+            explained_variance_score    0.8399821265302834
+            RMSE                        0.8746053286890739
+            ```
+            Model Visuals below along with SHAP (SHapley Additive exPlanations) is a game theoretic
+            approach to explain the output of any machine learning model.
             """
             st.markdown(modelwrite_up, unsafe_allow_html=True)
+            st.write('xgBoost feature importance and hypertuning results.')
 
-            st.write(feature_xgb)
-            st.write(predict_xgb)
-            st.write(result_xgb)
-
+            st.write(predict_xgb.head(10))
+            st.write(result_xgb.head())
+            st.write(feature_xgb.head())
             fig = px.bar(feature_xgb, feature_xgb['features'], feature_xgb['importance'])
             st.plotly_chart(fig)
+            st.write('Shap: The color represents the feature value (red high, blue low). This reveals higher of_distance higher TN')
+            image = Image.open('images/xgb1.png')
+            st.image(image, width = 500)
 
-        if st.sidebar.checkbox('Final Model'):
+            image = Image.open('images/xgb2.png')
+            st.image(image, width = 500)
+
+
+        if st.sidebar.checkbox('Model Choice and Reasoning'):
             html_temp = """
             <div style="background-color:#33A2FF;padding:1px">
-            <h4 style="color:#212F3D;text-align:center;">Final Model</h4>
+            <h4 style="color:#212F3D;text-align:center;">Model Choice and Reasoning</h4>
             </div>
             """
             st.markdown(html_temp,unsafe_allow_html=True)
 
             modelwrite_up = """
-            Final Model Write up
+            Which model did we choose xgboost or catboost I have a feeling catboost will be better.
             """
             st.markdown(modelwrite_up, unsafe_allow_html=True)
+
+
+            image = Image.open('images/shap_value.png')
+            st.image(image, width = 800)
 
 
 
