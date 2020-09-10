@@ -9,12 +9,12 @@ from PIL import Image
 
 #set title
 
-image = Image.open('images/oyster.png')
+image = Image.open('images/virginia.jpg')
 st.image(image, width = 800)
 
 def main():
     activities = ['Intro: About The Challenge', 'Data Preparation',
-    'Total Nitrogen Model', 'Team & Footnotes']
+    'Total Nitrogen Model', 'About The Team']
     option = st.sidebar.selectbox('Selection Option:', activities)
 
 #Intro
@@ -57,8 +57,6 @@ def main():
             Intro of Chesapeake bay problems
             Jen Section approach to the problem and data cleaning as well with features
             chosen and a little bit of data wrangling
-
-            [Fill in once most other stuff is settled.]
             """
 
             st.markdown(title_write,unsafe_allow_html=True)
@@ -72,13 +70,11 @@ def main():
             st.markdown(html_temp,unsafe_allow_html=True)
 
             title_write = """
-            TLDR of model and plan
-            Why was total nitrogen chosen
-            what features were chosen to predict total Nitrogen
-            some of the graphs and predictions
+            Intro of Chesapeake bay problems
+            Jen Section approach to the problem and data cleaning as well with features
+            chosen and a little bit of data wrangling
 
             [Fill in once most other stuff is settled.]
-
             """
 
             st.markdown(title_write,unsafe_allow_html=True)
@@ -91,6 +87,7 @@ def main():
         st.title('Data Preparation')
         html_temp = """
         <div style="background-color:#33A2FF;padding:1px">
+        <h3 style="color:#212F3D;text-align:center;">Data Preparation</h3>
         </div>
         """
         st.markdown(html_temp,unsafe_allow_html=True)
@@ -101,12 +98,9 @@ def main():
         We filtered the provided dataset for total nitrogen. Then, we
         aggregated data by date and longitude + latitude, and took a mean of the
         measure value, to obtain one reading for each day and each location
-        that samples were taken.
-        """
+        that samples were taken.        """
         st.markdown(explorationwrite_up, unsafe_allow_html=True)
 
-        image = Image.open('images/oyster2.png')
-        st.image(image, width = 700)
 
         ##########
         #Load DataFrames here for charts
@@ -122,63 +116,41 @@ def main():
 
         ##########
 
-        if st.sidebar.checkbox('Preparing: Land Cover Data'):
+        if st.sidebar.checkbox('Data Prep and Wrangling'):
             html_temp = """
             <div style="background-color:#33A2FF;padding:1px">
+            <h4 style="color:#212F3D;text-align:center;">Data Prep and Wrangling</h4>
             </div>
             """
             st.markdown(html_temp,unsafe_allow_html=True)
 
             explorationwrite_up = """
-
             ## Preparing: Land Cover Data
 
             Using land cover data from the Multi-Resolution Land Characteristics
             Consortium (MRLC) National Land Cover Viewer and the watershed HUC12
             boundaries shapefile (2), we obtained the following features:
-            * Land cover % usage for each code in the NLCD legend
-            * The mean of the pixel values for each segment
-            * The area of each segment in acres
 
-            """
-            st.markdown(explorationwrite_up, unsafe_allow_html=True)
+                * Land cover % usage for each code in the NLCD legend
+                * The mean of the pixel values for each segment
+                * The area of each segment in acres
 
-        if st.sidebar.checkbox('Preparing: Weather Data'):
-            html_temp = """
-            <div style="background-color:#33A2FF;padding:1px">
-            </div>
-            """
-            st.markdown(html_temp,unsafe_allow_html=True)
-
-            explorationwrite_up ="""
-
-            ## Preparing: Weather Data
+                ## Preparing: Weather Data
 
             We obtained weather data from North American Regional Reanalysis.
+
             The features we used were:
-            * Air Temperature
-            * Humidity
-            * Cloud Cover
-            * Surface Air Temperature
-            * Surface Runoff
-            * Wind Components
-            * Precipitation
+
+                * Air Temperature
+                * Humidity
+                * Cloud Cover
+                * Surface Air Temperature
+                * Surface Runoff
+                * Wind Components
+                * Precipitation
 
             We then extracted the above data for dates and location (longitude +
             latitude) relevant with each pollutant observation.
-
-            """
-
-            st.markdown(explorationwrite_up, unsafe_allow_html=True)
-
-        if st.sidebar.checkbox('Creating: Mean Encoded HUC12'):
-            html_temp = """
-            <div style="background-color:#33A2FF;padding:1px">
-            </div>
-            """
-            st.markdown(html_temp,unsafe_allow_html=True)
-
-            explorationwrite_up = """
 
             ## Creating: Mean Encoded HUC12
 
@@ -189,36 +161,11 @@ def main():
             Mean encoding introduces the correlation between the categories and the
             target variable in only one additional feature. (3)
 
-            """
-            st.markdown(explorationwrite_up, unsafe_allow_html=True)
-
-        if st.sidebar.checkbox('Creating: Distance from Outflow'):
-            html_temp = """
-            <div style="background-color:#33A2FF;padding:1px">
-            </div>
-            """
-            st.markdown(html_temp,unsafe_allow_html=True)
-
-            explorationwrite_up = """
-
             ## Creating: Distance from Outflow
 
             This is the distance from each sample location (latitude + longitude)
             from the outflow of the Bay (36.995833, -75.959444). We measured distance
             as the geodesic distance between two coordinates in miles. (4)
-
-            """
-
-            st.markdown(explorationwrite_up, unsafe_allow_html=True)
-
-        if st.sidebar.checkbox('Creating: NO2 from Point Sources'):
-            html_temp = """
-            <div style="background-color:#33A2FF;padding:1px">
-            </div>
-            """
-            st.markdown(html_temp,unsafe_allow_html=True)
-
-            explorationwrite_up = """
 
             ## Creating: NO2 from Point Sources
 
@@ -233,6 +180,8 @@ def main():
             year. For those missing values, we used a mean of the HUC12 correlated
             point sources. (5)
 
+
+
             """
             st.markdown(explorationwrite_up, unsafe_allow_html=True)
 
@@ -245,7 +194,9 @@ def main():
             st.markdown(html_temp,unsafe_allow_html=True)
 
             vizwrite_up = """
-            exploration of the chemicals in relation to nitrogen or other interesting finds from Tim.
+            exploration of the chemicals in relation to nitrogen or
+            other interesting finds from Tim.
+            exploring the relation of other chemicals with nitrogen
 
             ```python
             This is how I write code here.
@@ -254,7 +205,7 @@ def main():
             st.markdown(vizwrite_up, unsafe_allow_html=True)
 
             image = Image.open('images/oyster2.png')
-            st.image(image, width = 700)
+            st.image(image, width = 800)
 
 #Nitrogen Modeling
     elif option == 'Total Nitrogen Model':
@@ -545,16 +496,16 @@ def main():
 
 
 
-    elif option == 'Team & Footnotes':
-        st.title('Our Team')
+    elif option == 'About The Team':
+        st.title('Data Preparation')
         html_temp = """
         <div style="background-color:#33A2FF;padding:1px">
+        <h3 style="color:#212F3D;text-align:center;">Data Preparation</h3>
         </div>
         """
         st.markdown(html_temp,unsafe_allow_html=True)
 
         about_write = """
-
         ## Berenice
         about you
 
@@ -674,6 +625,8 @@ def main():
         """
 
         st.markdown(about_write,unsafe_allow_html=True)
+
+
 
 
 
