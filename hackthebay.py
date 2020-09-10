@@ -9,7 +9,7 @@ from PIL import Image
 
 #set title
 
-image = Image.open('images/oyster.png')
+image = Image.open('images/virginia.jpg')
 st.image(image, width = 800)
 
 def main():
@@ -141,7 +141,7 @@ def main():
             vizwrite_up = """
             exploration of the chemicals in relation to nitrogen or
             other interesting finds from Tim.
-            exploring the relation of other chemicals with nitrogen 
+            exploring the relation of other chemicals with nitrogen
 
             ```python
             This is how I write code here.
