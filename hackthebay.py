@@ -289,7 +289,18 @@ def main():
             st.markdown(html_temp,unsafe_allow_html=True)
 
             modelwrite_up = """
-            Catboost Write up
+            1. Feature selection
+
+                In this notebook, we use the following variables for prediction: 'latitude', 'longitude', 'areaacres', 'za_mean', ('lc_21', 'lc_22', 'lc_23', 'lc_24') combined as lc_2t, 'lc_31', ('lc_41', 'lc_42', 'lc_43') combined as lc_4t, 'lc_52', 'lc_71', 'lc_81', 'lc_82', ('lc_90', 'lc_95') combined as lc_9t, month', 'year', 'week', 'dayofweek', 'hour', 'min', 'quarter', 'airtemp_narr', 'precip3_narr', 'humidity_narr', 'cl_cover_narr', 'sfc_runoff', 'windspeed_narr', 'wdirection_narr', 'precip24_narr', 'precip48_narr', 'of_dist', 'total Nitrogen Oxide in year', and 'date_delta'.
+                Date_delta is a numeric variable which capture the time in seconds from the latest record. We could not keep 'new_date' in a datetime format (not supported by Catboost). The reasoning behind creating date_delta is that other time variables (month, year, week, day of week and quarter) are categorical. They can capture a seasonal phenomenon (pollution from industry on weekdays for example) but not a trend over time.
+                We removed the following variables: 'new_date' (replaced by datedelta which is numeric), 'huc12', and 'huc12_enc'.
+                The dependant variable (target) is the total nitrogen ('tn') in mg/L.
+
+            2. Catboost
+
+                Catboost can deal with missing values internally by giving them the minimal value for that feature (which translates into the guarantee to have a split that separates missing values from all other values). We want to test its capabilities on the non-imputed dataset.
+                Furthermore, categorical variables in the dataset don't need to be dummified (that's where the name Cat-boost comes from, it's good with categorical variables).
+                Because it's an ensemble method, feature scaling is not necessary.
             """
             st.markdown(modelwrite_up, unsafe_allow_html=True)
 
@@ -298,6 +309,12 @@ def main():
             fig = px.bar(feature_cat, feature_cat['Feature Id'], feature_cat['Importances'])
             st.plotly_chart(fig)
             image = Image.open('images/SHAP.png')
+            st.image(image, width = 500)
+
+            image = Image.open('images/corr1.png')
+            st.image(image, width = 500)
+
+            image = Image.open('images/corr2.png')
             st.image(image, width = 500)
 
 
@@ -543,7 +560,7 @@ def main():
         github
 
         ## Justin
-        Into anime, finance and NLP.
+        Into anime, finance computer vision and NLP.
 
         https://jvhuang1786.github.io
 
