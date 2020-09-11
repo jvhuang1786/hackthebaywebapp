@@ -114,7 +114,7 @@ def main():
         ###Land LandCover
 
         ###Water Quality
-        df = pd.read_csv('data/dfnitro.csv', index_col = 0)
+        # df = pd.read_csv('data/dfnitro.csv', index_col = 0)
 
         ##########
 
@@ -206,13 +206,15 @@ def main():
             """
             st.markdown(vizwrite_up, unsafe_allow_html=True)
 
-            fig = px.density_mapbox(df, lat='Latitude', lon='Longitude',
-                        z='WATER TEMPERATURE DEG deg c',
-                        radius=5, center=dict(lat=39.5, lon=-76),zoom=5,
-                        mapbox_style='stamen-terrain')
-            st.plotly_chart(fig)
+            # fig = px.density_mapbox(df, lat='Latitude', lon='Longitude',
+            #             z='WATER TEMPERATURE DEG deg c',
+            #             radius=5, center=dict(lat=39.5, lon=-76),zoom=5,
+            #             mapbox_style='stamen-terrain')
+            # st.plotly_chart(fig)
 
 
+            image = Image.open('images/tempmap.png')
+            st.image(image, width = 800)
             image = Image.open('images/DO_Active_Chlorophyll.png')
             st.image(image, width = 500)
             image = Image.open('images/Nitrogen_Phosphorus.png')
