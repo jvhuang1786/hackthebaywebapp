@@ -8,7 +8,6 @@ from plotly.offline import download_plotlyjs, init_notebook_mode, plot, iplot
 from plotly.subplots import make_subplots
 import matplotlib.pyplot as plt
 from PIL import Image
-import plotly.figure_factory as ff
 
 #set title
 
