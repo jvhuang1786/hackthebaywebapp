@@ -131,28 +131,28 @@ def main():
 
             Using land cover data from the Multi-Resolution Land Characteristics
             Consortium (MRLC) National Land Cover Viewer and the watershed HUC12
-            boundaries shapefile (2), we obtained the following features:
+            boundaries shapefile (1), we obtained the following features:
 
-                * Land cover % usage for each code in the NLCD legend
-                * The mean of the pixel values for each segment
-                * The area of each segment in acres
+            * Land cover % usage for each code in the NLCD legend
+            * The mean of the pixel values for each segment
+            * The area of each segment in acres
 
-                ## Preparing: Weather Data
+            ## Preparing: Weather Data
 
             We obtained weather data from North American Regional Reanalysis.
 
             The features we used were:
 
-                * Air Temperature
-                * Humidity
-                * Cloud Cover
-                * Surface Air Temperature
-                * Surface Runoff
-                * Wind Components
-                * Precipitation
+            * Air Temperature
+            * Humidity
+            * Cloud Cover
+            * Surface Air Temperature
+            * Surface Runoff
+            * Wind Components
+            * Precipitation
 
             We then extracted the above data for dates and location (longitude +
-            latitude) relevant with each pollutant observation.
+            latitude) relevant with each pollutant observation. (2)
 
             ## Creating: Mean Encoded HUC12
 
@@ -182,8 +182,6 @@ def main():
             year. For those missing values, we used a mean of the HUC12 correlated
             point sources. (5)
 
-
-
             """
             st.markdown(explorationwrite_up, unsafe_allow_html=True)
 
@@ -196,13 +194,7 @@ def main():
             st.markdown(html_temp,unsafe_allow_html=True)
 
             vizwrite_up = """
-            exploration of the chemicals in relation to nitrogen or
-            other interesting finds from Tim.
-            exploring the relation of other chemicals with nitrogen
-
-            ```python
-            This is how I write code here.
-            ```
+            We explored the relation of other chemicals with nitrogen and other finds
             """
             st.markdown(vizwrite_up, unsafe_allow_html=True)
 
@@ -212,15 +204,55 @@ def main():
             #             mapbox_style='stamen-terrain')
             # st.plotly_chart(fig)
 
-
             image = Image.open('images/tempmap.png')
             st.image(image, width = 800)
+
+            st.write("""
+            The scatter plots are plotted vs Latitude to show the general vertical
+            distribution. Figures are split as reporting levels for each item are
+            different. Since we focused on Nitrogen and Phosphorus I wanted to display
+            both with comparison to Latitude to highlight the higher values are present
+            at different latitudes.
+
+            Dissolved Oxygen and Active Chlorophyll were plotted to examine the
+            relation however the lack of Active Chlorophyll makes it difficult to
+            draw conclusions from the plot. There is one correlated peak between
+            the 2 values (negative on DO and positive on AC) around the 39 latitude.
+            Additionally it can be noted that low DO is more of a concern below 41
+            degrees.
+            """
+            )
+
+
             image = Image.open('images/DO_Active_Chlorophyll.png')
             st.image(image, width = 500)
+
+            st.write("""
+            Returning to the Nitrogen and Phosphorus it could be stated locations
+            with higher Phosphorus have lower DO values. Nitrogen does not have the
+            same effect.
+            """
+            )
             image = Image.open('images/Nitrogen_Phosphorus.png')
             st.image(image, width = 500)
+
+            st.write("""
+            This histogram is an attempt to show the different effects of water
+            temperature and salinity on pH. There isn't a large spike in temperature
+            from the data and salinity is dominated by freshwater sources. pH remains
+            within acceptable bounds looking at the distribution ~5 - 11.)
+            """
+            )
             image = Image.open('images/pH_Temp_Salinity.png')
             st.image(image, width = 500)
+
+            st.write("""
+            Suspended Solids and Turbidity appear well correlated when plotted vs.
+            latitude. Figure was included as a good correlation between two values.
+            The figure suffers from the lack of data in Turbidity from about 40 - 42
+            degrees.
+            """
+            )
             image = Image.open('images/Suspended_Solids_Turbidity.png')
             st.image(image, width = 500)
 
@@ -596,13 +628,7 @@ def main():
 
         about_write = """
 
-        ## (1) Weather data
-
-        [North American Regional Reanalysis (NARR)](https://www.ncdc.noaa.gov/data-access/model-data/model-datasets/north-american-regional-reanalysis-narr)
-
-        Data downloaded via: ftp://ftp.cdc.noaa.gov/Datasets/NARR/monolevel
-
-        ## (2) Land cover data
+        ## (1) Land cover data
 
         We downloaded land cover data from the Multi-Resolution Land Characteristics
         Consortium (MRLC) National Land Cover Viewer. A bounding box of the watershed
@@ -626,6 +652,12 @@ def main():
         [HUC12 boundaries shapefile](https://nrcs.app.box.com/v/huc/file/532373547877)
 
         [National Land Cover Database 2016 (NLCD2016) Legend](https://www.mrlc.gov/data/legends/national-land-cover-database-2016-nlcd2016-legend)
+
+        ## (2) Weather data
+
+        [North American Regional Reanalysis (NARR)](https://www.ncdc.noaa.gov/data-access/model-data/model-datasets/north-american-regional-reanalysis-narr)
+
+        Data downloaded via: ftp://ftp.cdc.noaa.gov/Datasets/NARR/monolevel
 
         ## (3) Encoded HUC12
 
